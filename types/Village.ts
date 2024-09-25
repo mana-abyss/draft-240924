@@ -1,9 +1,10 @@
 import { Building } from "./Building";
+import { Character } from "./Character";
 import { Dungeon } from "./Dungeon";
-import { ResourceType } from "./ResourceType";
+import { Equipment } from "./Equipment";
+import { RegularResource, Resource } from "./Resource";
 
-export interface VillageData
-  extends Record<`${ResourceType}Capacity` | `${ResourceType}`, number> {
+export interface VillageData extends Record<`${Resource}`, number> {
   level: number;
   exp: number;
   dungeons: Dungeon[];
@@ -13,8 +14,11 @@ export interface VillageData
 export interface Village
   extends VillageData,
     Record<
-      `${ResourceType}FixedProduction` | `${ResourceType}FixedConsumption`,
+      | `${RegularResource}Capacity`
+      | `${RegularResource}FixedProduction`
+      | `${RegularResource}FixedConsumption`,
       number
     > {
-  //
+  characters: Character[];
+  equipments: Equipment[];
 }
